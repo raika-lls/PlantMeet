@@ -1,0 +1,6 @@
+data/
+preview.png
+node_modules/
+*.log
+update-project.mjs
+finalize-update.mjs
