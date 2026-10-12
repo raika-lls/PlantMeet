@@ -6,7 +6,7 @@ export function expiration(now){const d=new Date(now),day=d.getUTCDate();d.setUT
 export async function handle(request,db,bucket,identity){try{
  const url=new URL(request.url),route=url.pathname.slice(5),method=request.method;
  if(method!=='GET'&&request.headers.get('Origin')&&request.headers.get('Origin')!==url.origin)fail('Запрос отклонён',403);
- if(!identity)return json({error:'Войдите в аккаунт',signin:'/signin-with-chatgpt?return_to=/'},401);
+ if(!identity)return json({error:'Войдите в аккаунт'},401);
  const uid=identity.userId,row=await db.prepare('SELECT id,name,role FROM users WHERE id=?').bind(uid).first();
  const read=async()=>{if(Number(request.headers.get('Content-Length'))>20000)fail('Слишком большой запрос');return request.json()};
  if(route==='me'&&method==='GET')return json({user:row});
