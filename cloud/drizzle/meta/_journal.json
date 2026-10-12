@@ -15,6 +15,13 @@
       "when": 1791809666612,
       "tag": "0001_wide_starfox",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1791811086985,
+      "tag": "0002_flat_santa_claus",
+      "breakpoints": true
     }
   ]
 }
