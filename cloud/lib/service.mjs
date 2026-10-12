@@ -22,7 +22,7 @@ export async function handle(request,db,bucket,identity){try{
  if(!row)fail('Завершите регистрацию',403);
  if(route==='state'&&method==='GET'){
   for(const r of (await db.prepare('SELECT id FROM recordings WHERE expires<=? LIMIT 100').bind(Date.now()).all()).results){await bucket.delete(r.id);await db.prepare('DELETE FROM recordings WHERE id=?').bind(r.id).run()}
-  return json({user:row,lessons:(await db.prepare(`SELECT m.id,m.owner,m.title,m.date,m.time,m.kind,m.duration,m.closed,${teacherSql} AS teacher FROM meetings m JOIN users u ON u.id=m.owner ORDER BY m.closed IS NOT NULL,m.date,m.time`).all()).results,records:(await db.prepare('SELECT r.*,m.title FROM recordings r JOIN meetings m ON m.id=r.meeting WHERE r.expires>? ORDER BY r.created DESC').bind(Date.now()).all()).results});
+  return json({user:row,lessons:(await db.prepare(`SELECT m.id,m.owner,m.title,m.date,m.time,m.kind,m.duration,m.closed,${teacherSql} AS teacher FROM meetings m JOIN users u ON u.id=m.owner ORDER BY m.closed IS NOT NULL,m.date,m.time`).all()).results,records:(await db.prepare('SELECT r.*,m.title FROM recordings r JOIN meetings m ON m.id=r.meeting WHERE r.expires>? AND r.owner=? ORDER BY r.created DESC').bind(Date.now(),uid).all()).results});
  }
  if(route==='lessons'&&method==='POST'){
   if(row.role!=='teacher')fail('Только преподаватель может создавать конференции',403);
@@ -62,7 +62,7 @@ export async function handle(request,db,bucket,identity){try{
   const id=guid(),now=Date.now();await bucket.put(id,blob,{httpMetadata:{contentType:'video/webm'}});try{await db.prepare('INSERT INTO recordings VALUES(?,?,?,?,?,?)').bind(id,meeting,uid,now,expiration(now),blob.byteLength).run()}catch(e){await bucket.delete(id);throw e}return json({id},201);
  }
  const record=/^recordings\/([^/]+)$/.exec(route);
- if(record){const r=await db.prepare('SELECT * FROM recordings WHERE id=?').bind(record[1]).first();if(!r||r.expires<=Date.now())fail('Запись не найдена или срок хранения истёк',404);
+ if(record){const r=await db.prepare('SELECT * FROM recordings WHERE id=? AND owner=?').bind(record[1],uid).first();if(!r||r.expires<=Date.now())fail('Запись не найдена или срок хранения истёк',404);
   if(method==='DELETE'){if(r.owner!==uid)fail('Удалить запись может её автор',403);await bucket.delete(r.id);await db.prepare('DELETE FROM recordings WHERE id=?').bind(r.id).run();return json({ok:true})}
   if(method==='GET'){const obj=await bucket.get(r.id,{range:request.headers});if(!obj)fail('Файл не найден',404);const h=new Headers({'Content-Type':'video/webm','Accept-Ranges':'bytes','Cache-Control':'private,no-store'});if(obj.range){h.set('Content-Range',`bytes ${obj.range.offset}-${obj.range.offset+obj.range.length-1}/${obj.size}`);h.set('Content-Length',String(obj.range.length))}else h.set('Content-Length',String(obj.size));return new Response(obj.body,{status:obj.range?206:200,headers:h})}
  }
