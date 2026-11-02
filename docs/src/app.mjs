@@ -1,3 +1,4 @@
+import './live.mjs';
 import {teacherPage} from './teacher.mjs';
 import {db,session} from './data.mjs';import {validate} from './validation.mjs';import {saveMeeting,deleteMeeting,deleteRecord} from './service.mjs';import {shell,modal,toast,button,esc} from './components.mjs';import {auth} from './pages/auth.mjs';import {sitemap} from './pages/map.mjs';import {home} from './pages/home.mjs';import {schedule,rows,filter,meetingForm} from './pages/schedule.mjs';import {details} from './pages/details.mjs';import {records} from './pages/records.mjs';import {attendance} from './pages/attendance.mjs';import {room} from './pages/room.mjs';
 const $=s=>document.querySelector(s);let dirty=false,active=null;
