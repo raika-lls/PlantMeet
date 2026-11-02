@@ -1,6 +1,7 @@
+import {teacherPage} from './teacher.mjs';
 import {db,session} from './data.mjs';import {validate} from './validation.mjs';import {saveMeeting,deleteMeeting,deleteRecord} from './service.mjs';import {shell,modal,toast,button,esc} from './components.mjs';import {auth} from './pages/auth.mjs';import {sitemap} from './pages/map.mjs';import {home} from './pages/home.mjs';import {schedule,rows,filter,meetingForm} from './pages/schedule.mjs';import {details} from './pages/details.mjs';import {records} from './pages/records.mjs';import {attendance} from './pages/attendance.mjs';import {room} from './pages/room.mjs';
 const $=s=>document.querySelector(s);let dirty=false,active=null;
-function render(){if(!session.user){$('#app').innerHTML=auth();return}const [page,id]=location.hash.slice(1).split('/');const pages={map:sitemap,home,schedule,records,attendance,details:()=>details(id),room:()=>room(id)};$('#app').innerHTML=shell((pages[page]||sitemap)())}
+function render(){if(!session.user){$('#app').innerHTML=auth();return}const [page,id]=location.hash.slice(1).split('/');const pages={map:sitemap,home,schedule,records,attendance,details:()=>details(id),room:()=>room(id)};$('#app').innerHTML=shell(teacherPage(page,id) ?? (pages[page]||sitemap)())}
 function close(){dirty=false;$('#modal').close()}
 function cancel(){if(dirty){const form=$('#meeting-form').outerHTML;modal(`<h2>Отменить изменения?</h2><p>Введённые значения не будут сохранены.</p>${button('discard','Отменить изменения','danger')}${button('keep','Продолжить редактирование')}`);cancel.saved=form}else close()}
 function openForm(m){dirty=false;modal(meetingForm(m));$('[name=title]').setAttribute('list','subjects')}
