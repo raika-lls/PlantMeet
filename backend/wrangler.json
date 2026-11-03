@@ -2,5 +2,13 @@
   "name": "plantmeet-api",
   "main": "worker.mjs",
   "compatibility_date": "2026-11-02",
-  "d1_databases": [{"binding":"DB","database_name":"plantmeet","database_id":"SET_AFTER_D1_CREATE","migrations_dir":"migrations"}]
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "plantmeet",
+      "database_id": "95105300-144d-4867-8d21-a2257249a7fe",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "account_id": "016c84027514ff037f5fbfed06e0e758"
 }

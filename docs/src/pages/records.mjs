@@ -1,2 +1,2 @@
-import {ownRecords} from '../service.mjs';import {button,esc} from '../components.mjs';
+import {ownRecords} from '../service.mjs?v=cloud-20261103';import {button,esc} from '../components.mjs?v=cloud-20261103';
 export function records(){return `<h2>Мои записи</h2><p>Только записи выбранного пользователя. Метаданные для демонстрации, видеофайлы в учебный набор не включены.</p><div class="stats">${ownRecords().map(r=>`<section class="card"><span class="badge">Учебная карточка</span><h3>${esc(r.title)}</h3><p>Сохранено: ${r.created}</p><p>Срок до: ${r.expires}</p>${button('delete-record','Удалить запись','danger',r.id)}</section>`).join('')||'<section class="card">Записей пока нет</section>'}</div>`}
