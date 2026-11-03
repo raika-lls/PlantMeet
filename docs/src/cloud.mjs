@@ -1,4 +1,4 @@
-import {db,session} from './data.mjs?v=cloud-20261103';import {toast} from './components.mjs?v=cloud-20261103';
+import {db,session} from './data.mjs?v=roster-20261103';import {toast} from './components.mjs?v=roster-20261103';
 export const API='https://plantmeet-api.plantmeet-raika.workers.dev';let token='',busy=false;let loadedSections={};
 export async function api(path,method='GET',body){const r=await fetch(API+path,{method,headers:{...(token?{Authorization:'Bearer '+token}:{}),...(body?{'Content-Type':'application/json'}:{})},body:body?JSON.stringify(body):undefined});const v=await r.json();if(!r.ok)throw Error(v.error||'Сервер недоступен');return v}
 export async function syncMeetings(){const r=await api('/meetings');db.meetings=r.meetings.map(m=>({...m,group:m.study_group,capacity:25,description:'',closed:!!m.closed}));}

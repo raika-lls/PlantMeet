@@ -1,8 +1,8 @@
-import {section,saveSection} from './cloud.mjs?v=cloud-20261103';
-import {academicPage} from './academic.mjs?v=cloud-20261103';
-import {liveRoom,privateRecords} from './live.mjs?v=cloud-20261103';
-import {db,session,subjects} from './data.mjs?v=cloud-20261103';
-import {esc as e,modal,toast,table} from './components.mjs?v=cloud-20261103';
+import {section,saveSection} from './cloud.mjs?v=roster-20261103';
+import {academicPage} from './academic.mjs?v=roster-20261103';
+import {liveRoom,privateRecords} from './live.mjs?v=roster-20261103';
+import {db,session,subjects} from './data.mjs?v=roster-20261103';
+import {esc as e,modal,toast,table} from './components.mjs?v=roster-20261103';
 const key='plantmeet-teacher-v1';let store;try{store=JSON.parse(localStorage.getItem(key))}catch{};
 store ||= {events:[],tasks:[{id:'t1',title:'7 неделя · практическая работа',subject:subjects[2],group:'ИС-24А',start:'2026-10-20',end:'2026-10-27',status:'Выполнено',text:'Разработка интерфейса информационной системы',recipients:['u1','u2']},{id:'t2',title:'Защита информации · лабораторная №5',subject:subjects[0],group:'ИС-24А',start:'2026-11-02',end:'2026-11-09',status:'Отправлено',text:'Подготовить отчет и демонстрацию',recipients:['u1','u2','u3']}],grades:{}};
 const save=async()=>{try{await saveSection('teaching',store);localStorage.setItem(key,JSON.stringify(store));return true}catch(e){toast('Не сохранено в базе: '+e.message,'error');return false}};

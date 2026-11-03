@@ -1,7 +1,7 @@
-import {visitRemote,closeRemoteMeeting,syncAttendance} from './cloud.mjs?v=cloud-20261103';
-import './live.mjs?v=cloud-20261103';
-import {teacherPage} from './teacher.mjs?v=cloud-20261103';
-import {db,session} from './data.mjs?v=cloud-20261103';import {validate} from './validation.mjs?v=cloud-20261103';import {saveMeeting,deleteMeeting,deleteRecord} from './service.mjs?v=cloud-20261103';import {shell,modal,toast,button,esc} from './components.mjs?v=cloud-20261103';import {auth} from './pages/auth.mjs?v=cloud-20261103';import {sitemap} from './pages/map.mjs?v=cloud-20261103';import {home} from './pages/home.mjs?v=cloud-20261103';import {schedule,rows,filter,meetingForm} from './pages/schedule.mjs?v=cloud-20261103';import {details} from './pages/details.mjs?v=cloud-20261103';import {records} from './pages/records.mjs?v=cloud-20261103';import {attendance} from './pages/attendance.mjs?v=cloud-20261103';import {room} from './pages/room.mjs?v=cloud-20261103';
+import {visitRemote,closeRemoteMeeting,syncAttendance} from './cloud.mjs?v=roster-20261103';
+import './live.mjs?v=roster-20261103';
+import {teacherPage} from './teacher.mjs?v=roster-20261103';
+import {db,session} from './data.mjs?v=roster-20261103';import {validate} from './validation.mjs?v=roster-20261103';import {saveMeeting,deleteMeeting,deleteRecord} from './service.mjs?v=roster-20261103';import {shell,modal,toast,button,esc} from './components.mjs?v=roster-20261103';import {auth} from './pages/auth.mjs?v=roster-20261103';import {sitemap} from './pages/map.mjs?v=roster-20261103';import {home} from './pages/home.mjs?v=roster-20261103';import {schedule,rows,filter,meetingForm} from './pages/schedule.mjs?v=roster-20261103';import {details} from './pages/details.mjs?v=roster-20261103';import {records} from './pages/records.mjs?v=roster-20261103';import {attendance} from './pages/attendance.mjs?v=roster-20261103';import {room} from './pages/room.mjs?v=roster-20261103';
 const $=s=>document.querySelector(s);let dirty=false,active=null;
 function render(){if(!session.user){$('#app').innerHTML=auth();return}const [page,id]=location.hash.slice(1).split('/');const pages={map:sitemap,home,schedule,records,attendance,details:()=>details(id),room:()=>room(id)};$('#app').innerHTML=shell(teacherPage(page,id) ?? (pages[page]||sitemap)())}
 function close(){dirty=false;$('#modal').close()}

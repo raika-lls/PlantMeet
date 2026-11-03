@@ -1,4 +1,4 @@
-import {session} from './data.mjs?v=cloud-20261103';export const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+import {session} from './data.mjs?v=roster-20261103';export const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 export const button=(a,t,cls='',id='')=>`<button type="button" data-action="${a}" data-id="${esc(id)}" class="${cls}">${t}</button>`;
 export function field(name,label,type='text',value='',options=[]){return `<label>${label}<${type==='select'?'select':'input'} name="${name}" ${type==='select'?'':`type="${type}" value="${esc(value)}"`}>${type==='select'?options.map(o=>`<option ${o===value?'selected':''}>${esc(o)}</option>`).join('')+'</select>':''}<span class="error" data-error="${name}"></span></label>`}
 export function toast(text,type='info'){const el=document.querySelector('#toast');el.textContent=text;el.dataset.type=type;el.style.display='block';clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display='none',5000)}

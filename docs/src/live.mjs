@@ -1,4 +1,4 @@
-import {db,session} from './data.mjs?v=cloud-20261103';import {esc,toast} from './components.mjs?v=cloud-20261103';
+import {db,session} from './data.mjs?v=roster-20261103';import {esc,toast} from './components.mjs?v=roster-20261103';
 let recorder,stream,chunks=[];
 const invited=new URLSearchParams(location.search).get('meeting');if(invited)location.hash='details/'+encodeURIComponent(invited);
 function database(){return new Promise((resolve,reject)=>{const r=indexedDB.open('plantmeet-private-recordings',1);r.onupgradeneeded=()=>r.result.createObjectStore('videos',{keyPath:'id'});r.onsuccess=()=>resolve(r.result);r.onerror=()=>reject(r.error)})}

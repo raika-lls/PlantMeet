@@ -1,0 +1,10 @@
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-01','Орынбек Арайлым','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-02','Ораз Нурайлым','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-03','Серик Балжан','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-04','Малиева Аружан','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-05','Конаева Сабина','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-06','Еркын Сабит','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-07','Нурболат Арайлым','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-08','Сағындық Айдана','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-09','Ахметов Данияр','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
+INSERT INTO student_roster(id,name,study_group,subgroup) VALUES('roster-is24a-10','Әлібек Мадина','ИС-24А','Подгруппа 1') ON CONFLICT(name,study_group) DO NOTHING;
