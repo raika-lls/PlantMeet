@@ -243,6 +243,9 @@ class Handler(BaseHTTPRequestHandler):
                 opts=json.loads(t['options'])
                 if ans not in opts:raise ValueError()
                 scores=json.dumps([int(opts[t['correct']]==ans)]);note='Тест кілті бойынша тексерілді.';ok=1
+            else:
+                values,note=analyze(c,t,ans)
+                scores=json.dumps(values)
             try:c.execute('INSERT INTO work(task,answer,declared,scores,note,approved) VALUES(?,?,?,?,?,?)',(t['id'],ans,decl,scores,note,ok))
             except sqlite3.IntegrityError:raise ValueError('Жауап жіберіліп қойған.')
         elif path in ('/api/grade','/api/approve'):
