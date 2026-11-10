@@ -4,3 +4,9 @@ node_modules/
 *.log
 update-project.mjs
 finalize-update.mjs
+.wrangler/
+__pycache__/
+*.sqlite
+SmartEdu/model/*
+!SmartEdu/model/*.cmd
+!SmartEdu/model/README.md
